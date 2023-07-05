@@ -31,42 +31,15 @@ else
 <a href="change.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Change Password</a><br/><br/>
 <a href="logout.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Logout</a><br/><br/>
 </div>
-<div class="col-sm-10" style="min-height:500px;">
-<h3 style="text-align:center;">CONTACT US</h3>
+<div class="col-sm-8" style="min-height:500px;"><h3 style="text-align:center;margin-left:140px;">CHANGE PASSWORD</h3>
 
-
-<table class="table table-responsiv" style="background:white;">
-<tr>
-<th>Sr.No</th>
-<th>Name</th>
-<th>Email</th>
-<th>Message</th>
-<th>Date</th>
-<th>Delete</th>
-</tr>
-<?php
-$conn=mysqli_connect("localhost","root","","calldb");
-if($conn==true)	
-{
- $cmd="select * from contact";
- $x=mysqli_query($conn,$cmd);
- if(mysqli_num_rows($x))
- {
-	 $a=0;
-	while($row=mysqli_fetch_assoc($x))
-	{
-		$a++;
-	echo "<tr><td>$a</td><td>".$row["name"]."</td><td>".$row["email"]."</td><td>".$row["msg"]."</td>
-	<td>".$row["cdt"]."</td><td><a href='../codes/delcon.php/?v=".$row["email"]."'><span class='fa fa-trash'></span></a></td></tr>";	
-	}
- }
- else
- {
-	 echo "<tr><td colspan='6'>No Record Available into Database</td></tr>";
- }
-}
-?>
-</table>
+<form action="#" method="post">
+<span style="color:white">Old Password</span><input type="password" name="opass" class="form-control" placeholder="old password"/><br/><br/>
+<span style="color:white">New Password</span><input type="password" name="npass" class="form-control" placeholder="new password"/><br/><br/>
+<span style="color:white">confirm Password</span><input type="password" name="cpass" class="form-control" placeholder="confirm password"/><br/><br/>
+<button type="submit">
+Change Password</button>
+</form>
 
 </div>
 </div>

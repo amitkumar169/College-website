@@ -1,78 +1,80 @@
+<?php
+session_start();
+if(isset($_SESSION["aid"]))
+{
+	
+}
+else
+{
+	echo "<script>alert('First Login Then Goto NaxtZone');window.location.href='../login.php'</script>";
+}
+?>
+
 <html>
 <head>
-
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-
-    <!-- FontAwesome CSS -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-
-    <!-- ElegantFonts CSS -->
-    <link rel="stylesheet" href="css/elegant-fonts.css">
-
-    <!-- themify-icons CSS -->
-    <link rel="stylesheet" href="css/themify-icons.css">
-
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="css/swiper.min.css">
-
-
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../css/font-awesome.min.css" rel="stylesheet"/>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container-fluid">
 <div class="row">
-<div class="col-sm-12" style="height:10%;width:100%;background-color:blue;">
-<h1 style="text-align:center;font-size:35px;text-shadow:2px 2px white">SHIVAJI COLLAGE</h1>
-</div>
-</div>
-<div class="row" style="height:10%;width:100%;">
-<div class="col-sm-12">
-<a href="index.php" style="margin-left:4px;text-decoration:none;font-size:20px;">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="about.php" style="text-decoration:none;font-size:20px;">About</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="registration.php" style="text-decoration:none;font-size:20px;">Registration</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="contact.php" style="text-decoration:none;font-size:20px;">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="login.php" style="text-decoration:none;font-size:20px;">Login</a>
-</div>
-</div>
-
+<div class="col-sm-12" style="min-height:90px;background:black;font-size:40px;text-align:center;">
+<h1 style="text-align:center;text-shadow:2px 2px 2px white;margin-top:8px;color:white;">ADMIN ZONE</h1>
+</div></div>
 <div class="row">
-<div class="col-sm-6">
-<img src="a6.jpg" style="height:620px;width:100%;margin-top:5px;border-radius:20px;"/>
+<div class="col-sm-2" style="min-height:570px;background:silver;">
+<a href="dashboard.php" style="text-decoration:none;margin-top:10px;text-shadow:2px 2px 2px white;color:black;">Dashboard</a><br/><br/>
+<a href="registration.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Registration</a><br/><br/>
+<a href="contact.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Contact</a><br/><br/>
+<a href="change.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Change Password</a><br/><br/>
+<a href="logout.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Logout</a><br/><br/>
+</div>
+<div class="col-sm-10" style="min-height:500px;">
+<h3 style="text-align:center;">REGISTRATION</h3>
+
+
+<table class="table table-responsiv" style="background:white;">
+<tr>
+<th>Sr.No</th>
+<th>Name</th>
+<th>Email</th>
+<th>Mobile</th>
+<th>Profile</th>
+<th>Address</th>
+<th>Date</th>
+<th>Delete</th>
+</tr>
+<?php
+$conn=mysqli_connect("localhost","root","","calldb");
+if($conn==true)	
+{
+ $cmd="select * from registration";
+ $x=mysqli_query($conn,$cmd);
+ if(mysqli_num_rows($x))
+ {
+	 $a=0;
+	while($row=mysqli_fetch_assoc($x))
+	{
+		$a++;
+	echo "<tr><td>$a</td><td>".$row["name"]."</td><td>".$row["gender"]."</td><td>".$row["email"]."</td>
+	<td>".$row["mob"]."</td><td><img src=../registration/".$row["profile"]."
+	height='50px' width='50px'/></td><td>".$row["address"]."</td><td>".$row["vdt"]."</td>
+	<td><a href='../codes/delreg.php/?v=".$row["email"]."'><span class='fa fa-trash'></span></a></td></tr>";	
+	}
+ }
+ else
+ {
+	 echo "<tr><td colspan='6'>No Record Available into Database</td></tr>";
+ }
+}
+?>
+</table>
+
 
 </div>
-<div class="col-sm-6" style="height:650px;width:100%;border:0px solid black;margin-bottom:0px;">
-<form class="contact-form" style="margin-top:5px;" method="post" action="codes/rcode.php" enctype="multipart/form-data">
-
-
-<input class="form-control" type="text" name="name" placeholder="Enter your name" style="height:40px;width:100%;margin-top:0px;" required/>
-Gender&nbsp<input type="radio" name="gender" value="male">Male&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<input type="radio" name="gender" value="female"style="margin-top:10px;">Female
-<input class="form-control" type="email" name="email" placeholder="Enter your email" style="height:40px;width:100%;margin-top:10px;" required/>
-<input class="form-control" type="phone" name="mob" placeholder="Enter Your Number" style="height:40px;width:100%;margin-top:20px;" required/>
-<input class="form-control" type="file" name="file" style="height:40px;width:100%;margin-top:20px;" required/>
-<input class="form-control" type="text" name="add" placeholder="Enter your Address" style="height:100px;width:100%;margin-top:20px;" required/>
-<input type="Submit" value="Submit" class="btn btn-danger" style="margin-bottom:50px;margin-top:20px;" required/>
-</form>
-</div>
-
-
- <script type='text/javascript' src='js/jquery.js'></script>
-    <script type='text/javascript' src='js/jquery.collapsible.min.js'></script>
-    <script type='text/javascript' src='js/swiper.min.js'></script>
-    <script type='text/javascript' src='js/jquery.countdown.min.js'></script>
-    <script type='text/javascript' src='js/circle-progress.min.js'></script>
-    <script type='text/javascript' src='js/jquery.countTo.min.js'></script>
-    <script type='text/javascript' src='js/jquery.barfiller.js'></script>
-    <script type='text/javascript' src='js/custom.js'></script>
-
-</div>
-
-<div class="row">
-<div class="col-sm-12" style="height:40px;width:100%;background-color:black;margin-top:40px;text-align:center;">
-Copyright &copy Mecatredz Technology Developed & Designed By Amit Kumar
 </div>
 </div>
-
 </body>
 </html>

@@ -2,7 +2,9 @@
 session_start();
 if(isset($_SESSION["aid"]))
 {
+	session_destroy();
 	
+	echo "<script>alert('Logout');window.location.href='../login.php'</script>";
 }
 else
 {
@@ -24,51 +26,18 @@ else
 <h1 style="text-align:center;text-shadow:2px 2px 2px white;margin-top:8px;color:white;">ADMIN ZONE</h1>
 </div></div>
 <div class="row">
-<div class="col-sm-2" style="min-height:570px;background:silver;">
+<div class="col-sm-2" style="min-height:500px;background:silver;">
 <a href="dashboard.php" style="text-decoration:none;margin-top:10px;text-shadow:2px 2px 2px white;color:black;">Dashboard</a><br/><br/>
 <a href="registration.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Registration</a><br/><br/>
 <a href="contact.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Contact</a><br/><br/>
 <a href="change.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Change Password</a><br/><br/>
 <a href="logout.php" style="text-decoration:none;text-shadow:2px 2px 2px white;color:black;">Logout</a><br/><br/>
 </div>
-<div class="col-sm-10" style="min-height:500px;">
-<h3 style="text-align:center;">CONTACT US</h3>
-
-
-<table class="table table-responsiv" style="background:white;">
-<tr>
-<th>Sr.No</th>
-<th>Name</th>
-<th>Email</th>
-<th>Message</th>
-<th>Date</th>
-<th>Delete</th>
-</tr>
-<?php
-$conn=mysqli_connect("localhost","root","","calldb");
-if($conn==true)	
-{
- $cmd="select * from contact";
- $x=mysqli_query($conn,$cmd);
- if(mysqli_num_rows($x))
- {
-	 $a=0;
-	while($row=mysqli_fetch_assoc($x))
-	{
-		$a++;
-	echo "<tr><td>$a</td><td>".$row["name"]."</td><td>".$row["email"]."</td><td>".$row["msg"]."</td>
-	<td>".$row["cdt"]."</td><td><a href='../codes/delcon.php/?v=".$row["email"]."'><span class='fa fa-trash'></span></a></td></tr>";	
-	}
- }
- else
- {
-	 echo "<tr><td colspan='6'>No Record Available into Database</td></tr>";
- }
-}
-?>
-</table>
-
 </div>
+</div>
+<div class="row">
+<div class="col-sm-12" style="min-height:50px;background:black;text-align:center;">
+Copyright &copy Mecatredz Technology Developed & Designed By Amit Kumar
 </div>
 </div>
 </body>
